@@ -11,7 +11,7 @@
       theme: {
         extend: {
           colors: {
-            primary: '#6366f1', // Mapping your 'primary' color to Indigo-500
+            primary: '#6366f1',
           }
         }
       }
@@ -32,14 +32,13 @@
   <script type="text/babel">
     const { useState, useEffect } = React;
     
-    // Destructure icons from the global window.lucide object
+    // FIX: Use LucideReact global (not window.lucide)
     const { 
       Brain, MessageSquare, DollarSign, Shield, Wrench, TrendingUp,
       ArrowRight, CheckCircle, Zap, Building2, Home,
       ChevronDown, Globe, Lock, BarChart3
-    } = window.lucide;
+    } = LucideReact;
 
-    // ─── Floating house icon ─────────────────────────────────────────────────────
     function FloatingHouse({ size = 24, style = {} }) {
       return (
         <div className="absolute opacity-10 text-primary animate-float" style={style}>
@@ -48,7 +47,6 @@
       );
     }
 
-    // ─── Feature card ────────────────────────────────────────────────────────────
     function FeatureCard({ icon: Icon, title, description, gradient }) {
       return (
         <div className="group relative p-px rounded-2xl bg-gradient-to-b from-white/10 to-transparent hover:from-primary/30 transition-all duration-500 cursor-default">
@@ -64,7 +62,6 @@
       );
     }
 
-    // ─── Main page ────────────────────────────────────────────────────────────────
     function LandingPage() {
       const [scrollY, setScrollY] = useState(0);
 
@@ -76,7 +73,6 @@
 
       return (
         <div className="min-h-screen bg-[#05050a] text-white overflow-x-hidden">
-          {/* ── Global CSS injected ── */}
           <style>{`
             @keyframes float {
               0%, 100% { transform: translateY(0px) rotate(0deg); }
@@ -134,7 +130,7 @@
             }
           `}</style>
 
-          {/* ── Navbar ── */}
+          {/* Navbar */}
           <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
             scrollY > 20 ? 'bg-[#05050a]/80 backdrop-blur-xl border-b border-white/5' : ''
           }`}>
@@ -161,7 +157,7 @@
             </div>
           </nav>
 
-          {/* ── Hero ── */}
+          {/* Hero */}
           <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
             <div className="absolute inset-0 grid-bg opacity-50" />
             <div className="glow-orb absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-600/30 rounded-full" />
@@ -273,7 +269,7 @@
             </div>
           </section>
 
-          {/* ── Features ── */}
+          {/* Features */}
           <section id="features" className="py-24 relative">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-950/10 to-transparent" />
             <div className="container mx-auto px-6 relative">
@@ -295,7 +291,7 @@
             </div>
           </section>
 
-          {/* ── How it works ── */}
+          {/* How it works */}
           <section id="how" className="py-24">
             <div className="container mx-auto px-6 max-w-5xl">
               <div className="text-center mb-16">
@@ -309,7 +305,7 @@
                     { step: '01', title: 'List your property', desc: 'Add your property details, set rent, and choose public or private listing. Takes under 3 minutes.', icon: Building2 },
                     { step: '02', title: 'AI screens applicants', desc: 'Claude analyses every application — employment, income verification, rental history — and ranks them for you.', icon: Brain },
                     { step: '03', title: 'Sign digitally', desc: 'Lease generated, signed, and stored automatically. WhatsApp agent activates for your new tenant.', icon: Lock },
-                    { step: '04', title: 'AI manages everything', desc: 'Rent collection, maintenance, communications. You get a monthly report. That\'s it.', icon: Zap },
+                    { step: '04', title: 'AI manages everything', desc: "Rent collection, maintenance, communications. You get a monthly report. That's it.", icon: Zap },
                   ].map((item, i) => (
                     <div key={i} className="flex gap-6 group card-hover">
                       <div className="relative flex-shrink-0">
@@ -333,7 +329,7 @@
             </div>
           </section>
 
-          {/* ── Final CTA ── */}
+          {/* Final CTA */}
           <section className="py-32 relative overflow-hidden">
             <div className="glow-orb absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-indigo-600/20 rounded-full" />
             <div className="relative container mx-auto px-6 text-center max-w-3xl">
@@ -363,7 +359,7 @@
             </div>
           </section>
 
-          {/* ── Footer ── */}
+          {/* Footer */}
           <footer className="border-t border-white/5 py-12">
             <div className="container mx-auto px-6">
               <div className="flex flex-col md:flex-row items-center justify-between gap-6">
@@ -387,7 +383,6 @@
       );
     }
 
-    // Render the app
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(<LandingPage />);
   </script>
